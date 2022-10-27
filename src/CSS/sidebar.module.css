@@ -4,8 +4,7 @@
     overflow: auto;
   }
   .nav_main_container {
-    border: 3px solid red;
-    width: 17%;
+    width: 17rem;
     height: 100vh;
     background-color: #333333;
     color: white;
