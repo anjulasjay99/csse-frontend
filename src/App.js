@@ -2,6 +2,7 @@ import Sidebar from "./Components/Sidebar";
 import AddProduct from "./Product Management/AddProduct";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import AddSupplier from "./SupplierManagement/AddSupplier";
+import UpdateSupplier from "./SupplierManagement/UpdateSupplier";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
 
           <Route path="/addProduct" element={<AddProduct />} exact />
 
+          <Route path="/updateSupplier/:id" element={<UpdateSupplier />} exact />
         </Routes>
       </BrowserRouter>
     </div>

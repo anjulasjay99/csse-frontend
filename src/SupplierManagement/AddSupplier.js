@@ -6,6 +6,7 @@ import styles from '../CSS/supplier.module.css'
 import { useState } from "react";
 import axios from "axios";
 import {postData} from './Facade';
+import Header from '../Components/Header';
 export default function AddSupplier() {
 
     const [ businessName , setbusinessName ] = useState("");
@@ -14,7 +15,7 @@ export default function AddSupplier() {
     const [ telephone , settelephone ] = useState("");
     const [ email , setemail ] = useState("");
     const [ address , setaddress ] = useState("");
-    const [ state , setstate ] = useState("");
+    const [ state , setstate ] = useState("Colombo");
     const [ zip , setzip ] = useState("");
    
     // function postData(url, params = {}) {
@@ -53,11 +54,18 @@ export default function AddSupplier() {
     }
 
     function clear(){
-
+        setaddress("")
+        setbusinessName("")
+        setemail("")
+        setfullName("")
+        setstate("Colombo")
+        setsupplierId("")
+        settelephone("")
+        setzip("")
     }
   return (
     <>
-    
+    <Header/>
     <div className={styles.parent}>
       <Sidebar/>
     <div className={styles.child}>
@@ -73,7 +81,7 @@ export default function AddSupplier() {
                                 className={styles.input}
                                 id="pid"
                                 name="pid"
-                                placeholder="Product Name"
+                                placeholder="Business Name"
                                 type="text"
                                 value={businessName}
                                 onChange={(e) => setbusinessName(e.target.value)}
@@ -90,7 +98,7 @@ export default function AddSupplier() {
                                 className={styles.input}
                                 id="pRate"
                                 name="pRate"
-                                placeholder="Price Rate"
+                                placeholder="Full Name"
                                 type="text"
                                 value={fullName}
                                 onChange={(e) => setfullName(e.target.value)}
@@ -107,6 +115,7 @@ export default function AddSupplier() {
                                 onChange={(e) => setaddress(e.target.value)}
                                 value={address}
                                 id="description"
+                                placeholder="Address"
                                 name="description"
                                 type="text"
                                 required
@@ -114,29 +123,14 @@ export default function AddSupplier() {
                     </FormGroup>     
                     </Row>
                     <Row>
-                        <Col md={6}>
-                        <FormGroup>
-                                <Label for="quantity">State</Label>
-                                <Input
-                                className={styles.input}
-                                id="quantity"
-                                name="quantity"
-                                placeholder="Quantity"
-                                type="text"
-                                value={state}
-                                onChange={(e) => setstate(e.target.value)}
-                                required
-                                />
-                        </FormGroup>                           
-                        </Col>
-                        <Col md={6}>
+                    <Col md={6}>
                         <FormGroup>
                                 <Label for="quantity">Zip Code</Label>
                                 <Input
                                 className={styles.input}
                                 id="quantity"
                                 name="quantity"
-                                placeholder="Quantity"
+                                placeholder="Zip Code"
                                 type="text"
                                 value={zip}
                                 onChange={(e) => setzip(e.target.value)}
@@ -144,6 +138,40 @@ export default function AddSupplier() {
                                 />
                         </FormGroup>                           
                         </Col>
+                        <Col md={6}>
+                        <FormGroup>
+                                <Label for="exampleSelect">
+                                State
+                                </Label>
+                                <Input
+                                id="exampleSelect"
+                                name="select"
+                                type="select"
+                                onChange={(e) => setstate(e.target.value)}
+                                >
+                                <option>
+                                    Colombo
+                                </option>
+                                <option>
+                                    Matara
+                                </option>
+                              
+                                <option>
+                                    Galle
+                                </option>
+                                <option>
+                                    Gampaha
+                                </option>
+                                <option>
+                                    Kaluthara
+                                </option>
+                                <option>
+                                    Hambanthota
+                                </option>
+                                </Input>
+                            </FormGroup>                  
+                        </Col>
+                      
                     </Row>
                     <Row>
                     <FormGroup>
@@ -153,6 +181,7 @@ export default function AddSupplier() {
                                 id="productImage"
                                 name="productImage"
                                 type="text"
+                                placeholder="Email"
                                 value={email}
                                 onChange={(e) => setemail(e.target.value)}
         
@@ -168,7 +197,7 @@ export default function AddSupplier() {
                                 className={styles.input}
                                 id="quantity"
                                 name="quantity"
-                                placeholder="Quantity"
+                                placeholder="Supplier Id"
                                 type="text"
                                 value={supplierId}
                                 onChange={(e) => setsupplierId(e.target.value)}
@@ -183,7 +212,7 @@ export default function AddSupplier() {
                                 className={styles.input}
                                 id="quantity"
                                 name="quantity"
-                                placeholder="Quantity"
+                                placeholder="Telephone"
                                 type="text"
                                 value={telephone}
                                 onChange={(e) => settelephone(e.target.value)}
@@ -201,20 +230,10 @@ export default function AddSupplier() {
                         </Button>
                         <Button color="warning" style={{float:"right"}} > 
                             Submit
-                        </Button>
-                       
+                        </Button>   
                     </ButtonGroup>
-
-                </Form>
-               
-            
+                </Form> 
             </div>
-  
-        
-            
-
-
-           
         </div>
     </div>
 
