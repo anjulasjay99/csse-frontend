@@ -1,9 +1,11 @@
 import Sidebar from "../Components/Sidebar";
-import styles from '../CSS/addProduct.module.css';
+import styles from '../CSS/Product.module.css';
 import { Button, Form, FormGroup, Label, Input , Row , Col ,ButtonGroup , FormText } from "reactstrap";
-import { useState } from "react";
+import { useState , useEffect } from "react";
 import axios from "axios";
 import { FormControl } from "react-bootstrap";
+import Offline from "../Components/Offline";
+
 function AddProduct(){
 
     const [ productName , setName ] = useState("");
@@ -13,7 +15,7 @@ function AddProduct(){
     const [ quantity , setQuantity ] = useState("");
     const [ description , setDescription ] = useState("");
     const [ image , setImage ] = useState("");
-
+    const [ isOnline , setOnline ] = useState();
     const onChangeFile = (e) =>{
         setImage(e.target.files[0]);
     };
@@ -38,150 +40,172 @@ function AddProduct(){
     }
 
     function clear(){
-
+        setName("");
+        setSupplier("");
+        setPrice("");
+        setQuantity("");
+        setQuantityType("");
+        setDescription("");
     }
 
+    useEffect(()=>{
+        // Implementation of observer design pattern
+
+        // Subscription to events (Online and Offline)
+        window.addEventListener("online" , () => setOnline(true));
+        window.addEventListener("offline" , () => setOnline(false));
+
+        return() =>{
+            // Removing the even on component gets unmounted
+
+            window.removeEventListener("online" , () => setOnline(true));
+            window.removeEventListener("offline", () => setOnline(false));
+        }
+    }, [])
+
     return(
-        <div className={styles.bodyContent}>
-                <Sidebar/>
-                <div className={styles.formContainer}>
-                <Form className = {styles.formWrap} encType="multipart/form-data">
-                <h2 style={{color : "#ffff00"}}>Add Product</h2>
-                    <Row>
-                        <Col md={6}>
-                            <FormGroup>
-                                <Label for="pid">Product Name</Label>
-                                <Input
-                                className={styles.input}
-                                id="pid"
-                                name="pid"
-                                placeholder="Product Name"
-                                type="text"
-                                value={productName}
-                                onChange={(e) => setName(e.target.value)}
-                                required
-                                />
-                            </FormGroup>
-                        </Col>
-                        <Col md={6}>
-                        <FormGroup>
-                                <Label for="supName">Supplier Name</Label>
-                                <Input
-                                className={styles.input}
-                                id="supName"
-                                name="supName"
-                                placeholder="Supplier Name"
-                                type="text"
-                                value={supplierName}
-                                onChange={(e) => setSupplier(e.target.value)}
-                                required
-                                />
-                            </FormGroup>
-                        </Col>
-                    </Row>
-                    <Row>
-                            <FormGroup>
-                                <Label for="pRate">Price Rate</Label>
-                                <Input
-                                className={styles.input}
-                                id="pRate"
-                                name="pRate"
-                                placeholder="Price Rate"
-                                type="text"
-                                value={priceRate}
-                                onChange={(e) => setPrice(e.target.value)}
-                                required
-                                />
-                            </FormGroup>
-                    </Row>
-                    <Row>
-                        <Col md={6}>
+        <>
+        {isOnline ? (
+             <div className={styles.bodyContent}>
+             <Sidebar/>
+             <div className={styles.formContainer}>
+             <Form className = {styles.formWrap} encType="multipart/form-data">
+             <h2 style={{color : "#ffff00"}}>Add Product</h2>
+                 <Row>
+                     <Col md={6}>
+                         <FormGroup>
+                             <Label for="pid">Product Name</Label>
+                             <Input
+                             className={styles.input}
+                             id="pid"
+                             name="pid"
+                             placeholder="Product Name"
+                             type="text"
+                             value={productName}
+                             onChange={(e) => setName(e.target.value)}
+                             required
+                             />
+                         </FormGroup>
+                     </Col>
+                     <Col md={6}>
+                     <FormGroup>
+                             <Label for="supName">Supplier Name</Label>
+                             <Input
+                             className={styles.input}
+                             id="supName"
+                             name="supName"
+                             placeholder="Supplier Name"
+                             type="text"
+                             value={supplierName}
+                             onChange={(e) => setSupplier(e.target.value)}
+                             required
+                             />
+                         </FormGroup>
+                     </Col>
+                 </Row>
+                 <Row>
+                         <FormGroup>
+                             <Label for="pRate">Price Rate</Label>
+                             <Input
+                             className={styles.input}
+                             id="pRate"
+                             name="pRate"
+                             placeholder="Price Rate"
+                             type="text"
+                             value={priceRate}
+                             onChange={(e) => setPrice(e.target.value)}
+                             required
+                             />
+                         </FormGroup>
+                 </Row>
+                 <Row>
+                     <Col md={6}>
 
-                        <FormGroup>
-                                <Label for="exampleSelect">
-                                Select Quantity Type
-                                </Label>
-                                <Input
-                                id="exampleSelect"
-                                name="select"
-                                type="select"
-                                onChange={(e) => setQuantityType(e.target.value)}
-                                >
-                                <option>
-                                    Bags
-                                </option>
-                                <option>
-                                    Qb
-                                </option>
-                                </Input>
-                            </FormGroup>
-                        </Col>
-                        <Col md={6}>
-                        <FormGroup>
-                                <Label for="quantity">Quantity</Label>
-                                <Input
-                                className={styles.input}
-                                id="quantity"
-                                name="quantity"
-                                placeholder="Quantity"
-                                type="text"
-                                value={quantity}
-                                onChange={(e) => setQuantity(e.target.value)}
-                                required
-                                />
-                        </FormGroup>                           
-                        </Col>
-                    </Row>
-                    <Row>
-                    <FormGroup>
-                                <Label for="description">Description</Label>
-                                <Input
-                                className={styles.input}
-                                onChange={(e) => setDescription(e.target.value)}
-                                id="description"
-                                name="description"
-                                type="textarea"
-                                required
-                                />
-                    </FormGroup>     
-                    </Row>
+                     <FormGroup>
+                             <Label for="exampleSelect">
+                             Select Quantity Type
+                             </Label>
+                             <Input
+                             id="exampleSelect"
+                             name="select"
+                             type="select"
+                             onChange={(e) => setQuantityType(e.target.value)}
+                             >
+                             <option>
+                                 Bags
+                             </option>
+                             <option>
+                                 Qb
+                             </option>
+                             </Input>
+                         </FormGroup>
+                     </Col>
+                     <Col md={6}>
+                     <FormGroup>
+                             <Label for="quantity">Quantity</Label>
+                             <Input
+                             className={styles.input}
+                             id="quantity"
+                             name="quantity"
+                             placeholder="Quantity"
+                             type="text"
+                             value={quantity}
+                             onChange={(e) => setQuantity(e.target.value)}
+                             required
+                             />
+                     </FormGroup>                           
+                     </Col>
+                 </Row>
+                 <Row>
+                 <FormGroup>
+                             <Label for="description">Description</Label>
+                             <Input
+                             className={styles.input}
+                             onChange={(e) => setDescription(e.target.value)}
+                             id="description"
+                             name="description"
+                             type="textarea"
+                             required
+                             />
+                 </FormGroup>     
+                 </Row>
 
-                    <Row>
-                    <FormGroup>
-                                <Label for="productImage">Product Image</Label>
-                                <Input
-                                className={styles.input}
-                                id="productImage"
-                                name="productImage"
-                                type="file"
-                                filename="productImage"
-                                onChange={onChangeFile}
-                                required
-                                />
-                    </FormGroup>  
-                    </Row>
-                    <ButtonGroup>
-                        <Button color="danger" style={{float:"left"}} onClick={(e)=>{
-                            clear(e);
-                        }}>
-                            Clear
-                        </Button>
-                        <Button color="warning" style={{float:"right"}} onClick={(e)=>{
-                            submit(e);
-                        }}> 
-                            Submit
-                        </Button>
-                    </ButtonGroup>
+                 <Row>
+                 <FormGroup>
+                             <Label for="productImage">Product Image</Label>
+                             <Input
+                             className={styles.input}
+                             id="productImage"
+                             name="productImage"
+                             type="file"
+                             filename="productImage"
+                             onChange={onChangeFile}
+                             required
+                             />
+                 </FormGroup>  
+                 </Row>
+                 <ButtonGroup>
+                     <Button color="danger" style={{float:"left"}} onClick={(e)=>{
+                         clear(e);
+                     }}>
+                         Clear
+                     </Button>
+                     <Button color="warning" style={{float:"right"}} onClick={(e)=>{
+                         submit(e);
+                     }}> 
+                         Submit
+                     </Button>
+                 </ButtonGroup>
 
-                </Form>
-            </div>
-  
-            
-            
-
-
-           
-        </div>
+             </Form>
+         </div>
+        
+     </div>
+        ) : (
+            <Offline/>
+        )}
+       
+    </>    
     )
 }
 

@@ -3,7 +3,7 @@ import styles from '../CSS/sidebar.module.css'
 import { NavLink } from "react-router-dom";
 function Sidebar(){
     return(
-        <>
+    <>
      <div className= {styles.nav_main_container}>
 
 
