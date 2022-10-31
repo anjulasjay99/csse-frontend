@@ -1,11 +1,9 @@
 import React from 'react'
 import Sidebar from '../Components/Sidebar'
 import { Button, Form, FormGroup, Label, Input , Row , Col ,ButtonGroup , FormText } from "reactstrap";
-import { MDBBtn, MDBCard, MDBCardBody, MDBCardImage, MDBCol, MDBContainer, MDBIcon, MDBInput, MDBRow, MDBTypography } from 'mdb-react-ui-kit';
 import styles from '../CSS/supplier.module.css'
 import { useState } from "react";
-import axios from "axios";
-import {postData} from './Facade';
+import {postData} from './Supplierfacade';
 import Header from '../Components/Header';
 export default function AddSupplier() {
 
@@ -17,14 +15,6 @@ export default function AddSupplier() {
     const [ address , setaddress ] = useState("");
     const [ state , setstate ] = useState("Colombo");
     const [ zip , setzip ] = useState("");
-   
-    // function postData(url, params = {}) {
-    //     return axios({
-    //       url: url,
-    //       method: "POST",
-    //       params: params
-    //     }).then(res => res.data)
-    //   }
    
     function submit(e) {
         e.preventDefault();
@@ -45,12 +35,18 @@ export default function AddSupplier() {
         postData(url, newSupplier).then((res)=>{
             console.log(res.data);
             alert("Added Succesfully");
+            setaddress("")
+            setbusinessName("")
+            setemail("")
+            setfullName("")
+            setstate("Colombo")
+            setsupplierId("")
+            settelephone("")
+            setzip("")
         }).catch((err) =>{
             console.log(err);
         })
-        // console.log(newSupplier);
-        // const url = 'http://localhost:8070/supplier'
-        // postData(newSupplier,url)
+     
     }
 
     function clear(){
@@ -65,7 +61,7 @@ export default function AddSupplier() {
     }
   return (
     <>
-    <Header/>
+    <Header HeadTitle="Add Suppliers"/>
     <div className={styles.parent}>
       <Sidebar/>
     <div className={styles.child}>
@@ -93,7 +89,7 @@ export default function AddSupplier() {
                     </Row>
                     <Row>
                             <FormGroup>
-                                <Label for="pRate">Full Name</Label>
+                                <Label for="pRate">Full Name *</Label>
                                 <Input
                                 className={styles.input}
                                 id="pRate"
@@ -109,7 +105,7 @@ export default function AddSupplier() {
                    
                     <Row>
                     <FormGroup>
-                                <Label for="description">Address</Label>
+                                <Label for="description">Address *</Label>
                                 <Input
                                 className={styles.input}
                                 onChange={(e) => setaddress(e.target.value)}
@@ -125,7 +121,7 @@ export default function AddSupplier() {
                     <Row>
                     <Col md={6}>
                         <FormGroup>
-                                <Label for="quantity">Zip Code</Label>
+                                <Label for="quantity">Zip Code *</Label>
                                 <Input
                                 className={styles.input}
                                 id="quantity"
@@ -141,7 +137,7 @@ export default function AddSupplier() {
                         <Col md={6}>
                         <FormGroup>
                                 <Label for="exampleSelect">
-                                State
+                                State *
                                 </Label>
                                 <Input
                                 id="exampleSelect"
@@ -175,7 +171,7 @@ export default function AddSupplier() {
                     </Row>
                     <Row>
                     <FormGroup>
-                                <Label for="productImage">Email</Label>
+                                <Label for="productImage">Email *</Label>
                                 <Input
                                 className={styles.input}
                                 id="productImage"
@@ -192,7 +188,7 @@ export default function AddSupplier() {
                     <Row>
                         <Col md={6}>
                         <FormGroup>
-                                <Label for="quantity">Supplier Id</Label>
+                                <Label for="quantity">Supplier Id *</Label>
                                 <Input
                                 className={styles.input}
                                 id="quantity"
@@ -207,7 +203,7 @@ export default function AddSupplier() {
                         </Col>
                         <Col md={6}>
                         <FormGroup>
-                                <Label for="quantity">Telephone</Label>
+                                <Label for="quantity">Telephone *</Label>
                                 <Input
                                 className={styles.input}
                                 id="quantity"

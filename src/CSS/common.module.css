@@ -7,10 +7,7 @@
   font-family: 'Montserrat';
 }
 
-body{
-  background: #dfecff;
-  color: #7f8db0;
-}
+
 
 a{
    color: #7f8db0;
@@ -296,4 +293,16 @@ a{
 
 .popup .notification_dd li.title .close:hover{
   opacity: 0.5;
+}
+
+.icon_notification{
+  color: yellow;
+  margin-right: 30px;
+}
+
+.container_fluid{
+  color: yellow;
+}
+.maincontainer{
+  color: #3b80f9;
 }

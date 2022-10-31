@@ -1,11 +1,10 @@
 import React from 'react'
 import Sidebar from '../Components/Sidebar'
 import { Button, Form, FormGroup, Label, Input , Row , Col ,ButtonGroup , FormText } from "reactstrap";
-import { MDBBtn, MDBCard, MDBCardBody, MDBCardImage, MDBCol, MDBContainer, MDBIcon, MDBInput, MDBRow, MDBTypography } from 'mdb-react-ui-kit';
 import styles from '../CSS/supplier.module.css'
 import { useState,useEffect } from "react";
 import axios from "axios";
-import {postData} from './Facade';
+import {postData} from './Supplierfacade';
 import {useParams} from "react-router-dom"
 
 export default function UpdateSupplier() {
@@ -21,13 +20,6 @@ export default function UpdateSupplier() {
     const {id} = useParams();
     
    
-    // function postData(url, params = {}) {
-    //     return axios({
-    //       url: url,
-    //       method: "POST",
-    //       params: params
-    //     }).then(res => res.data)
-    //   }
     useEffect(()=>{
     
         axios.get(`http://localhost:8070/supplier/get/6359762895c26c28ebc5fce9`).then((res)=>{
@@ -73,9 +65,7 @@ export default function UpdateSupplier() {
         }).catch((err) =>{
             console.log(err);
         })
-        // console.log(newSupplier);
-        // const url = 'http://localhost:8070/supplier'
-        // postData(newSupplier,url)
+       
     }
 
     function clear(){
