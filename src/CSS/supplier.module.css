@@ -1,0 +1,44 @@
+.parent {
+    height: 100%;
+    position:relative;
+  }
+   
+  .child {
+   
+    background-color:#999999;
+    
+   
+  }
+
+  .formContainer{
+    margin-right: 5rem;
+    margin-left: 15rem;
+    margin-top: 6rem;
+    bottom:30px;
+    right:25px;
+    position:absolute;
+    width:65%;
+    height:90%;
+    border-style: groove;
+    border-radius: 1rem;
+    border-color: #ffff00;
+    background-color: #262626;
+    box-shadow: rgba(0, 0, 0, 0.1) 2px 1px 3px 2px,
+    rgba(0, 0, 0, 0.06) 2px 1px 2px 2px;
+}
+.formWrap{
+  margin-right: 4rem;
+  margin-left: 4rem;
+  margin-top: 1.9rem;
+ 
+    color: white;
+
+}
+.input{
+    border-color: #ffff00;
+    border-width: 0.5px;
+}
+
+.btn{
+  margin-top: 0.5rem;
+}
