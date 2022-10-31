@@ -2,6 +2,10 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
 }
+.head{
+ margin-top: 10rem;
+}
+
 .formContainer{
     margin-right: 5rem;
     margin-left: -15rem;
