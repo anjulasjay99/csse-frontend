@@ -27,8 +27,10 @@ export default function UpdateSupplier() {
     
    //method to set particular supplier
     useEffect(()=>{
-        axios.get(`http://localhost:8070/supplier/get/6359762895c26c28ebc5fce9`).then((res)=>{  
-           console.log(res.data)
+    
+        axios.get(`http://localhost:8070/supplier/get/${id}`).then((res)=>{
+          
+          console.log(res.data)
           setbusinessName(res.data.businessName)
           setaddress(res.data.address)
           setemail(res.data.email)
