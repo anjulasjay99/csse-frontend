@@ -5,6 +5,7 @@ import Offline from "./Components/Offline";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import AddSupplier from "./SupplierManagement/AddSupplier";
 import UpdateSupplier from "./SupplierManagement/UpdateSupplier";
+import ViewSuppliers from "./SupplierManagement/ViewSuppliers";
 
 function App() {
   return (
@@ -18,7 +19,7 @@ function App() {
           <Route path="/addProduct" element={<AddProduct />} exact />
           <Route path="/viewProducts" element={<ViewProducts />} exact />
           <Route path="/offline" element={<Offline />} exact />
-
+          <Route path="/ViewSuppliers" element={<ViewSuppliers />} exact />
           <Route path="/updateSupplier/:id" element={<UpdateSupplier />} exact />
         </Routes>
       </BrowserRouter>

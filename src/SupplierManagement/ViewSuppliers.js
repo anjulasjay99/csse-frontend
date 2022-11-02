@@ -1,37 +1,61 @@
 import React, { useEffect, useState } from "react";
-import PageTitle from "../PageTitle";
-import styles from "../../styles/fuelStation.module.css";
-import common from "../../styles/common.module.css";
+import styles from "../CSS/supplier.module.css";
+import common from "../CSS/common.module.css";
 import { Button, Input, Table } from "reactstrap";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import Header from '../Common/Header';
+import Header from '../Components/Header';
 import { BsPencilSquare, BsTrash } from "react-icons/bs";
+import Sidebar from '../Components/Sidebar';
 
 function ViewSuppliers() {
   const navigate = useNavigate();
   const [suppliers, setSuppliers] = useState([]);
-  var [email, setemail] = useState("");
-  const [search, setsearch] = useState("");
+  const [searchVal, setSearchVal] = useState("");
+  let email = "samanperera@gmail.com";
+  let {filterData} = useState();
 
-  const bkgSearch = (val) => {
-    setsearch(val);
-
-    if (val === "") {
-      getSuppliers(email);
-    } else {
-      getBkgSeach(val);
-    }
-  };
-
-  function updateBkg(booking) {
-    console.log(booking._id)
-    navigate(`/updateBooking/${booking._id}`)
+  const getData = () => {
+    axios.get(`http://localhost:8070/supplier/get/user/${email}`)
+        .then((res) => {
+          setSuppliers(res.data);
+    })
   }
 
-  const deleteBkg = (booking) => {
-    console.log(booking)
-    axios.delete(`http://localhost:8070/fuelBookings/delete/${booking._id}`).then((data) => {
+  const filterSuppliers = e =>{
+    setSearchVal(e.target.value);
+    if(e.target.value === ""){
+      getData();
+    }
+  }
+
+  const supplierSearch = () =>{
+ 
+    filterData = suppliers.filter((value)=>{
+      return(
+        value.businessName.toLowerCase().includes(searchVal.toLowerCase()) || 
+        value.supplierId.toLowerCase().includes(searchVal.toLowerCase()) ||
+        value.fullName.toLowerCase().includes(searchVal.toLowerCase()) ||
+        value.telephone.toLowerCase().includes(searchVal.toLowerCase()) ||
+        value.email.toLowerCase().includes(searchVal.toLowerCase()) ||
+        value.address.toLowerCase().includes(searchVal.toLowerCase()) ||
+        value.state.toLowerCase().includes(searchVal.toLowerCase()) ||
+        value.zip.toLowerCase().includes(searchVal.toLowerCase()) 
+      )     
+    })
+    console.log(filterData)
+    setSuppliers(filterData)
+   
+  }
+
+  function updateSupplier(supplier) {
+    console.log(supplier._id)
+    navigate(`/updateSupplier/${supplier._id}`)
+  }
+
+  const deleteSupplier = (supplier) => {
+    console.log(supplier)
+    axios.delete(`http://localhost:8070/supplier/delete/${supplier._id}`).then((data) => {
       console.log(data);
       window.location.reload();
       alert("Booking Successfully Deleted");
@@ -41,159 +65,117 @@ function ViewSuppliers() {
     })
   }
 
-  const getBkgSeach = (val) => {
-    axios
-      .get(
-        `http://localhost:8070/fuelBookings/${email}?val=${val}`
-      )
-      .then((res) => {
-        setSuppliers(res.data.data);
-      })
-      .catch((e) => {
-        alert(e);
-      });
+  const addNewSupplier = () => {
+    navigate("/addsupplier");
   };
 
-  const getSuppliers = (id) => {
+  useEffect(() => {
     axios
-      .get(`http://localhost:8070/fuelBookings/${id}`)
+      .get("http://localhost:8070/supplier/")
       .then((res) => {
         setSuppliers(res.data.data);
-        console.log(suppliers);
       })
       .catch((err) => {
         alert(err);
       });
-  };
-
-  const createNewBkg = () => {
-    navigate("/createBooking");
-  };
-
-  useEffect(() => {
-    var userData = sessionStorage.getItem("customer");
-    if (userData == null) {
-      navigate("/customer-login");
-    }
-    setemail(userData);
-    getSuppliers(userData);
   }, []);
 
   if (suppliers.length === 0) {
     return (
       <div>
-        <Header />
-        <PageTitle pageTitle={"Fuel Bookings"} />
+        <Header HeadTitle="All Suppliers" />
       </div>
     );
   } else {
     return (
-      <div>
-        <Header />
-        <PageTitle pageTitle={"Fuel Bookings"} />
-        <div
-          style={{
-            width: "100%",
-            marginTop: "50px",
-            padding: "0px 100px 0px 100px",
-          }}
-        >
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "space-between",
-            }}
-          >
-            <div
-              style={{
-                marginBottom: "20px",
-                width: "50%",
-                display: "flex",
-                flexDirection: "row",
-                alignItems: "center",
-                columnGap: "10px",
-              }}
-            >
-              <Input
-                id="search"
-                name="search"
-                className={common.searchInput}
-                placeholder="Search"
-                type="text"
-                value={search}
-                onChange={(e) => bkgSearch(e.target.value)}
-              />
-            </div>
-            <div>
-              <Button
-                className={common.btnPrimary}
-                onClick={createNewBkg} >
-                Create Booking
-              </Button>
+      <>
+        <Header HeadTitle="All Suppliers" />
+        <div className={styles.parent} >
+          <div className={styles.child}>
+            <Sidebar />
+            <div className={styles.tableContainer}>
+              <div className={styles.rowBeforeTable} >
+                <div
+                  style={{
+                    marginBottom: "20px",
+                    width: "50%",
+                    display: "flex",
+                    flexDirection: "row",
+                    alignItems: "center",
+                    columnGap: "10px",
+                  }}
+                >
+                  <Input
+                    id="search"
+                    name="search"
+                    className={common.searchInput}
+                    placeholder="Search"
+                    type="text"
+                    onChange={filterSuppliers}
+                    allowClear
+                    value={searchVal}
+                  />
+                   <Button
+                    className={common.btnPrimary}
+                    onClick={supplierSearch} type="submit" 
+                  > search</Button>
+                </div>
+                <div>
+                  <Button
+                    className={common.btnPrimary}
+                    onClick={addNewSupplier}
+                  >
+                    Add Supplier
+                  </Button>
+                </div>
+              </div>
+
+              <Table  striped
+                className={styles.table}
+              >
+                <thead style={{ backgroundColor: "aliceblue" }}>
+                  <tr>
+                    <th>No</th>
+                    <th>Business Name</th>
+                    <th>Supplier ID </th>
+                    <th>Supplier Name</th>
+                    <th>Supplier Number</th>
+                    <th>Supplier Email</th>
+                    <th>Supplier Address</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {suppliers.length > 0
+                    ? suppliers.map((supplier, index) => {
+                      return (
+                        <tr key={index} style={{ color: "aliceblue" }} >
+                          <td>{index + 1}</td>
+                          <td>{supplier.businessName}</td>
+                          <td>{supplier.supplierId}</td>
+                          <td>{supplier.fullName}</td>
+                          <td>{supplier.telephone}</td>
+                          <td>{supplier.email}</td>
+                          <td>{supplier.address}</td>
+                          <td>
+                            <div style={{ float: "left" }}>
+
+                              <div> <BsPencilSquare onClick={() => { updateSupplier(supplier) }} size={20} style={{ marginLeft: "5px", float: "left" }} /> Edit
+                                <BsTrash onClick={() => { deleteSupplier(supplier) }} size={20} style={{ marginLeft: "20px" }} /> Delete
+                              </div>
+
+                            </div>
+                          </td>
+                        </tr>
+                      );
+                    })
+                    : "No data available"}
+                </tbody>
+              </Table>
             </div>
           </div>
-
-          <Table bordered striped className={common.table}>
-            <thead>
-              <tr>
-                <th>No</th>
-                <th>Business Name</th>
-                <th>Supplier ID </th>
-                <th>Supplier Name</th>
-                <th>Supplier Email</th>
-                <th>Supplier Address</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {suppliers.length > 0
-                ? suppliers.map((booking, index) => {
-                  return (
-                    <tr>
-                      <td>{index + 1}</td>
-                      <td>{booking.bookingId}</td>
-                      <td>{booking.vehicleType}</td>
-                      <td>{booking.vehicleNo}</td>
-                      <td>{booking.stationName}</td>
-                      <td>{booking.bkgDate}</td>
-                      <td>{booking.litres}</td>
-                      <td>
-                        <span
-                          style={{
-                            background:
-                              booking.status === "Approved"
-                                ? "#43a047"
-                                : booking.status === "Rejected"
-                                  ? "#e53935"
-                                  : "#f9a825",
-                          }}
-                          className={styles.status}
-                        >
-                          {booking.status}
-                        </span>
-                      </td>
-                      <td>
-                        <div style={{ float: "left" }}>
-                          <div>
-                            {booking.status === "Pending"
-                              ? <div> <BsPencilSquare onClick={() => { updateBkg(booking) }} size={20} style={{ marginLeft: "5px", float: "left" }} /> Edit
-                                <BsTrash onClick={() => { deleteBkg(booking) }} size={20} style={{ marginLeft: "20px" }} /> Delete
-                              </div>
-                              : booking.status === "Rejected"
-                                ? <div><BsTrash onClick={() => { deleteBkg(booking) }} size={20} style={{ marginLeft: "75px" }} /> Delete </div>
-                                : <div><BsTrash onClick={() => { deleteBkg(booking) }} size={20} style={{ marginLeft: "75px" }} /> Delete </div>
-                            } </div>
-                        </div>
-                      </td>
-                    </tr>
-                  );
-                })
-                : "No data available"}
-            </tbody>
-          </Table>
         </div>
-      </div>
+      </>
     );
   }
 }

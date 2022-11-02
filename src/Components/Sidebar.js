@@ -15,7 +15,7 @@ function Sidebar(){
             <p className= {styles.nav_link_clearfix}>DASHBOARD</p>
           </div>
         </NavLink>
-        <NavLink to="/customer-view-vehicles" className= {styles.link_styles}>
+        <NavLink to="/ViewSuppliers" className= {styles.link_styles}>
           <div className= {styles.nav_link_wrapper}>
             <i className="fa fa-car" aria-hidden="true"></i>
             <p className= {styles.nav_link_clearfix}>Supplier MANAGEMENT</p>
