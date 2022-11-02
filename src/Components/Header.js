@@ -13,7 +13,7 @@ function Header({ HeadTitle }){
   <div   className="container-fluid">
     <div className="collapse navbar-collapse" id="navbarSupportedContent">
       <ul style={{color:"yellow" , fontSize:"40px"}}className="navbar-nav me-auto mb-2 mb-lg-0">
-        <li className="nav-item">
+        <li className="nav-item" style={{ fontFamily:"'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif"}}>
           {HeadTitle}
         </li>
          <li className="nav-item">

@@ -9,6 +9,8 @@
     background-color: #333333;
     color: white;
      overflow: auto;
+     border-top-style: groove;
+     border-top-color: #ffff00;
   }
   /* Hide scrollbar for Chrome, Safari and Opera */
   .nav_main_container::-webkit-scrollbar {
