@@ -22,7 +22,7 @@ export default function UpdateSupplier() {
    
     useEffect(()=>{
     
-        axios.get(`http://localhost:8070/supplier/get/6359762895c26c28ebc5fce9`).then((res)=>{
+        axios.get(`http://localhost:8070/supplier/get/${id}`).then((res)=>{
           
           console.log(res.data)
           setbusinessName(res.data.businessName)
