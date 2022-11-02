@@ -7,4 +7,8 @@ function addNewSupplier(addsupplier,newSupplier) {
     return axios.post(addsupplier,newSupplier)
 }
 
-export  {addNewSupplier}
+function viewSupplier(url){
+    return axios.get(url)
+}
+
+export  {addNewSupplier,viewSupplier}

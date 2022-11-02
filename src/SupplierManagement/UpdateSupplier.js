@@ -5,10 +5,10 @@ import { Button, Form, FormGroup, Label, Input , Row , Col ,ButtonGroup , FormTe
 import styles from '../CSS/supplier.module.css'
 import { useState,useEffect } from "react";
 import axios from "axios";
-import {addNewSupplier} from './Supplierfacade';
+import {addNewSupplier} from './SupplierFacade';
 import {useParams} from "react-router-dom"
 import {postSupplierUrl} from './SupplierConstants'
-
+import {viewSupplier} from './SupplierFacade';
 
 //beginning of Updatesupplier method
 export default function UpdateSupplier() {
@@ -28,7 +28,8 @@ export default function UpdateSupplier() {
    //method to set particular supplier
     useEffect(()=>{
     
-        axios.get(`http://localhost:8070/supplier/get/${id}`).then((res)=>{
+        let url = `http://localhost:8070/supplier/get/${id}`;
+        viewSupplier(url).then((res)=>{
           
           console.log(res.data)
           setbusinessName(res.data.businessName)
@@ -62,7 +63,7 @@ export default function UpdateSupplier() {
             zip
         };
 
-        const url = `http://localhost:8070/supplier/update/6359762895c26c28ebc5fce9`
+        let url = `http://localhost:8070/supplier/update/${id}`
         
         //fetch add new supplier method
         addNewSupplier(url, newSupplier).then((res)=>{
@@ -144,17 +145,35 @@ export default function UpdateSupplier() {
                         <Row>
                             <Col md={6}>
                             <FormGroup>
-                                    <Label for="quantity">State</Label>
-                                    <Input
-                                    className={styles.input}
-                                    id="quantity"
-                                    name="quantity"
-                                    placeholder="Quantity"
-                                    type="text"
-                                    value={state}
-                                    onChange={(e) => setstate(e.target.value)}
-                                    required
-                                    />
+                            <Label for="exampleSelect">
+                                State *
+                                </Label>
+                                <Input
+                                id="exampleSelect"
+                                name="select"
+                                type="select"
+                                onChange={(e) => setstate(e.target.value)}
+                                >
+                                <option>
+                                    Colombo
+                                </option>
+                                <option>
+                                    Matara
+                                </option>
+                              
+                                <option>
+                                    Galle
+                                </option>
+                                <option>
+                                    Gampaha
+                                </option>
+                                <option>
+                                    Kaluthara
+                                </option>
+                                <option>
+                                    Hambanthota
+                                </option>
+                                </Input>
                             </FormGroup>                           
                             </Col>
                             <Col md={6}>
