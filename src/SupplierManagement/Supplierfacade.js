@@ -1,11 +1,14 @@
-import React from 'react'
 import axios from 'axios'
 
 
-
-function postData(url,newSupplier) {
+//seperate conntion to backend of addnew supplier
+function addNewSupplier(addsupplier,newSupplier) {
     console.log(newSupplier)
-    return axios.post(url,newSupplier)
+    return axios.post(addsupplier,newSupplier)
 }
 
-export  {postData}
+function viewSupplier(url){
+    return axios.get(url)
+}
+
+export  {addNewSupplier,viewSupplier}

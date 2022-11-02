@@ -1,12 +1,18 @@
+//import modules and packages
 import React from 'react'
 import Sidebar from '../Components/Sidebar'
 import { Button, Form, FormGroup, Label, Input , Row , Col ,ButtonGroup , FormText } from "reactstrap";
 import styles from '../CSS/supplier.module.css'
 import { useState } from "react";
-import {postData} from './Supplierfacade';
+import {addNewSupplier} from './SupplierFacade';
 import Header from '../Components/Header';
+import {postSupplierUrl} from './SupplierConstants'
+ 
+
+//beginning of AddSupplier method
 export default function AddSupplier() {
 
+    //declare supplier attributes
     const [ businessName , setbusinessName ] = useState("");
     const [ supplierId , setsupplierId ] = useState("");
     const [ fullName , setfullName ] = useState("");
@@ -16,11 +22,13 @@ export default function AddSupplier() {
     const [ state , setstate ] = useState("Colombo");
     const [ zip , setzip ] = useState("");
    
+    //function to submit a new supplier
     function submit(e) {
         e.preventDefault();
         console.log("aaa")
         console.log(businessName);
        
+        //declaration of new subblier object
         const newSupplier ={
             businessName,
             supplierId,
@@ -31,8 +39,12 @@ export default function AddSupplier() {
             state,
             zip
         };
+
+        //add supplier url
         const url = 'http://localhost:8070/supplier'
-        postData(url, newSupplier).then((res)=>{
+
+        //fetch add new supplier method
+        addNewSupplier(postSupplierUrl, newSupplier).then((res)=>{
             console.log(res.data);
             alert("Added Succesfully");
             setaddress("")
@@ -49,6 +61,7 @@ export default function AddSupplier() {
      
     }
 
+    //function to clear all the fields
     function clear(){
         setaddress("")
         setbusinessName("")
@@ -59,13 +72,14 @@ export default function AddSupplier() {
         settelephone("")
         setzip("")
     }
+
+
   return (
     <>
     <Header HeadTitle="Add Suppliers"/>
     <div className={styles.parent}>
-      <Sidebar/>
-    <div className={styles.child}>
-
+        <Sidebar/>
+             <div className={styles.child}>
                 <div className={styles.formContainer}>
                 <Form onSubmit={submit} className = {styles.formWrap} encType="multipart/form-data">
                 <h2  style={{color : "#ffff00",paddingTop:"0px"}}>Add Supplier</h2>
@@ -232,9 +246,6 @@ export default function AddSupplier() {
             </div>
         </div>
     </div>
-
     </>
-  
- 
   )
 }
