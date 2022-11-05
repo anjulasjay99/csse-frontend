@@ -44,20 +44,20 @@ export default function AddSupplier() {
         const url = 'http://localhost:8070/supplier'
 
         //fetch add new supplier method
-        addNewSupplier(postSupplierUrl, newSupplier).then((res)=>{
-            console.log(res.data);
-            alert("Added Succesfully");
-            setaddress("")
-            setbusinessName("")
-            setemail("")
-            setfullName("")
-            setstate("Colombo")
-            setsupplierId("")
-            settelephone("")
-            setzip("")
-        }).catch((err) =>{
-            console.log(err);
-        })
+    //     addNewSupplier(postSupplierUrl, newSupplier).then((res)=>{
+    //         console.log(res.data);
+    //         alert("Added Succesfully");
+    //         setaddress("")
+    //         setbusinessName("")
+    //         setemail("")
+    //         setfullName("")
+    //         setstate("Colombo")
+    //         setsupplierId("")
+    //         settelephone("")
+    //         setzip("")
+    //     }).catch((err) =>{
+    //         console.log(err);
+    //     })
      
     }
 

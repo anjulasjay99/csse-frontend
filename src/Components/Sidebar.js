@@ -12,44 +12,44 @@ function Sidebar(){
         <NavLink to="/customer-profile" className= {styles.link_styles}>
           <div className= {styles.nav_link_wrapper}>
             <i className="fa fa-user" aria-hidden="true"></i>
-            <p className= {styles.nav_link_clearfix}>DASHBOARD</p>
+            <p className= {styles.nav_text}>DASHBOARD</p>
           </div>
         </NavLink>
         <NavLink to="/ViewSuppliers" className= {styles.link_styles}>
           <div className= {styles.nav_link_wrapper}>
             <i className="fa fa-car" aria-hidden="true"></i>
-            <p className= {styles.nav_link_clearfix}>Supplier MANAGEMENT</p>
+            <p className= {styles.nav_text}>Supplier MANAGEMENT</p>
           </div>
         </NavLink>
         <NavLink to="/customer-report" className= {styles.link_styles}>
           <div className= {styles.nav_link_wrapper}>
             <i className="fa fa-file-pdf-o" aria-hidden="true"></i>
-            <p className= {styles.nav_link_clearfix}>Order MANAGEMENT</p>
+            <p className= {styles.nav_text}>Order MANAGEMENT</p>
           </div>
         </NavLink>
         <NavLink to="/customer-report" className= {styles.link_styles}>
           <div className= {styles.nav_link_wrapper}>
             <i className="fa fa-file-pdf-o" aria-hidden="true"></i>
-            <p className= {styles.nav_link_clearfix}>Product MANAGEMENT</p>
+            <p className= {styles.nav_text}>Product MANAGEMENT</p>
           </div>
         </NavLink>
         <NavLink to="/customer-report" className= {styles.link_styles}>
           <div className= {styles.nav_link_wrapper}>
             <i className="fa fa-file-pdf-o" aria-hidden="true"></i>
-            <p className= {styles.nav_link_clearfix}>Delivery MANAGEMENT</p>
+            <p className= {styles.nav_text}>Delivery MANAGEMENT</p>
           </div>
         </NavLink>
         <NavLink to="/customer-report" className= {styles.link_styles}>
           <div className= {styles.nav_link_wrapper}>
             <i className="fa fa-file-pdf-o" aria-hidden="true"></i>
-            <p className= {styles.nav_link_clearfix}>Transaction MANAGEMENT</p>
+            <p className= {styles.nav_text}>Transaction MANAGEMENT</p>
           </div>
         </NavLink>
-        <div style={{marginTop:"15rem"}}>
+        <div className={styles.signOut}>
         <NavLink to="/customer-report" className= {styles.link_styles}>
           <div className= {styles.nav_link_wrapper}>
             <i className="fa fa-file-pdf-o" aria-hidden="true"></i>
-            <p className= {styles.nav_link_clearfix}>SIGN OUT</p>
+            <p className= {styles.nav_text}>SIGN OUT</p>
           </div>
         </NavLink>
         </div>

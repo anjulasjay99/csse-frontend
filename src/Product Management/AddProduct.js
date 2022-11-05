@@ -1,10 +1,11 @@
 import axios from "axios";
 import Sidebar from "../Components/Sidebar";
 import styles from '../CSS/Product.module.css';
-import { Button, Form, FormGroup, Label, Input , Row , Col ,ButtonGroup  } from "reactstrap";
+import { Button, Form, FormGroup, Label, Input , Row , Col   } from "reactstrap";
 import { useState , useEffect } from "react";
 import Offline from "../Components/Offline";
-
+import Header from '../Components/Header';
+import { useNavigate } from "react-router-dom";
 function AddProduct(){
 
     // Setting use states for variables to add products.
@@ -19,6 +20,8 @@ function AddProduct(){
     const [ isOnline , setOnline ] = useState(true);
     const [ suppliers , setSuppliers ] = useState([]);
 
+    // Setting navigation constant to use for page navigations.
+    const navigate = useNavigate();
     // Seeting the image to the use state variable when uploaded.
     const onChangeFile = (e) =>{
         setImage(e.target.files[0]);
@@ -27,8 +30,8 @@ function AddProduct(){
     // Function to get suppliers to be bound to the dropdown
     function getSuppliers() {
         axios.get('http://localhost:8070/supplier/').then((res) =>{
-            setSuppliers(res.data);
-            console.log(res.data);
+            setSuppliers(res.data.data);
+            console.log(res.data.data);
         }).catch((err) =>{
             console.log(err);
         })
@@ -37,6 +40,12 @@ function AddProduct(){
     // Function triggered when clicking the submit button
     function submit() {
 
+        if(productName === '' || supplierName === '' || description === '' || quantity ===  ''){
+            alert("Please fill the whole form!");
+        }
+        else{
+
+        
         const formData = new FormData();
 
         formData.append("productName" , productName );
@@ -51,9 +60,11 @@ function AddProduct(){
         axios.post('http://localhost:8070/products/addProduct' , formData).then((res)=>{
             console.log(res);
             alert("Added Succesfully");
+            navigate('/viewProducts');
         }).catch((err) =>{
             console.log(err);
         })
+        }
     }
 
     // Function to clear the form
@@ -87,15 +98,18 @@ function AddProduct(){
     return(
         <>
         {isOnline ? (
+            <>
+            <Header HeadTitle="Add Material"/>
              <div className={styles.bodyContent}>
+                
              <Sidebar/>
              <div className={styles.formContainer}>
              <Form className = {styles.formWrap} encType="multipart/form-data">
-             <h2 style={{color : "#ffff00"}}>Add Product</h2>
+             <h2 style={{color : "#ffff00" , fontFamily: "'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif" , marginLeft:"35%" , marginBottom:"2rem"}}>Add Product</h2>
                  <Row>
                      <Col md={6}>
                          <FormGroup>
-                             <Label for="pid">Product Name</Label>
+                             <Label for="pid" className={styles.label}>Product Name</Label>
                              <Input
                              className={styles.input}
                              id="pid"
@@ -110,7 +124,7 @@ function AddProduct(){
                      </Col>
                      <Col md={6}>
                      <FormGroup>
-                             <Label for="supName">Supplier Name</Label>
+                             <Label for="supName" className={styles.label}>Supplier Name</Label>
                              <Input
                              className={styles.input}
                              id="supName"
@@ -130,7 +144,7 @@ function AddProduct(){
                  </Row>
                  <Row>
                          <FormGroup>
-                             <Label for="pRate">Price Rate</Label>
+                             <Label for="pRate" className={styles.label}>Price Rate</Label>
                              <Input
                              className={styles.input}
                              id="pRate"
@@ -147,7 +161,7 @@ function AddProduct(){
                      <Col md={6}>
 
                      <FormGroup>
-                             <Label for="exampleSelect">
+                             <Label for="exampleSelect" className={styles.label}>
                              Select Quantity Type
                              </Label>
                              <Input
@@ -167,13 +181,13 @@ function AddProduct(){
                      </Col>
                      <Col md={6}>
                      <FormGroup>
-                             <Label for="quantity">Quantity</Label>
+                             <Label for="quantity" className={styles.label}>Quantity</Label>
                              <Input
                              className={styles.input}
                              id="quantity"
                              name="quantity"
                              placeholder="Quantity"
-                             type="text"
+                             type="number"
                              value={quantity}
                              onChange={(e) => setQuantity(e.target.value)}
                              required
@@ -183,7 +197,7 @@ function AddProduct(){
                  </Row>
                  <Row>
                  <FormGroup>
-                             <Label for="description">Description</Label>
+                             <Label for="description" className={styles.label}>Description</Label>
                              <Input
                              className={styles.input}
                              onChange={(e) => setDescription(e.target.value)}
@@ -197,7 +211,7 @@ function AddProduct(){
 
                  <Row>
                  <FormGroup>
-                             <Label for="productImage">Product Image</Label>
+                             <Label for="productImage" className={styles.label}>Product Image</Label>
                              <Input
                              className={styles.input}
                              id="productImage"
@@ -209,23 +223,24 @@ function AddProduct(){
                              />
                  </FormGroup>  
                  </Row>
-                 <ButtonGroup>
-                     <Button color="danger" style={{float:"left"}} onClick={(e)=>{
+                 <div className={styles.btnGrp}>
+                     <Button color="danger" style={{float:"left" , fontFamily: "'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif"}} onClick={(e)=>{
                          clear(e);
                      }}>
                          Clear
                      </Button>
-                     <Button color="warning" style={{float:"right"}} onClick={(e)=>{
+                     <Button color="warning" style={{float:"right" , fontFamily: "'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif"}} onClick={(e)=>{
                          submit(e);
                      }}> 
-                         Submit
+                         Add Product
                      </Button>
-                 </ButtonGroup>
+                 </div>
 
              </Form>
          </div>
         
      </div>
+     </>
         ) : (
             <Offline/>
         )}
