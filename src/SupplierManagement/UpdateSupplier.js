@@ -9,6 +9,7 @@ import {addNewSupplier} from './SupplierFacade';
 import {useParams} from "react-router-dom"
 import {postSupplierUrl} from './SupplierConstants'
 import {viewSupplier} from './SupplierFacade';
+import Header from '../Components/Header';
 
 //beginning of Updatesupplier method
 export default function UpdateSupplier() {
@@ -90,6 +91,7 @@ export default function UpdateSupplier() {
    
     return (
       <>
+       <Header HeadTitle="Update Supplier"/>
         <div className={styles.parent}>
            <Sidebar/>
         <div className={styles.child}>
