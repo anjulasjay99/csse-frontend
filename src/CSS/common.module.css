@@ -298,6 +298,7 @@ a{
 .icon_notification{
   color: yellow;
   margin-right: 30px;
+  flex: content;
 }
 
 .container_fluid{
@@ -306,3 +307,4 @@ a{
 .maincontainer{
   color: #3b80f9;
 }
+

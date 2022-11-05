@@ -5,10 +5,12 @@ import { Button, Form, FormGroup, Label, Input , Row , Col ,ButtonGroup , FormTe
 import styles from '../CSS/supplier.module.css'
 import { useState,useEffect } from "react";
 import axios from "axios";
-// import {addNewSupplier} from './SupplierFacade';
+import {addNewSupplier} from './Supplierfacade';
 import {useParams} from "react-router-dom"
 import {postSupplierUrl} from './SupplierConstants'
-// import {viewSupplier} from './SupplierFacade';
+import {viewSupplier} from './Supplierfacade';
+import Header from '../Components/Header';
+
 
 //beginning of Updatesupplier method
 export default function UpdateSupplier() {
@@ -90,6 +92,7 @@ export default function UpdateSupplier() {
    
     return (
       <>
+       <Header HeadTitle="Update Supplier"/>
         <div className={styles.parent}>
            <Sidebar/>
         <div className={styles.child}>
@@ -183,8 +186,8 @@ export default function UpdateSupplier() {
                                     className={styles.input}
                                     id="quantity"
                                     name="quantity"
-                                    placeholder="Quantity"
-                                    type="text"
+                                    placeholder="Zip Code"
+                                    type="number"
                                     value={zip}
                                     onChange={(e) => setzip(e.target.value)}
                                     required
@@ -199,7 +202,7 @@ export default function UpdateSupplier() {
                                     className={styles.input}
                                     id="productImage"
                                     name="productImage"
-                                    type="text"
+                                    type="email"
                                     value={email}
                                     onChange={(e) => setemail(e.target.value)}
             
@@ -215,7 +218,7 @@ export default function UpdateSupplier() {
                                     className={styles.input}
                                     id="quantity"
                                     name="quantity"
-                                    placeholder="Quantity"
+                                    placeholder="Supplier Id"
                                     type="text"
                                     value={supplierId}
                                     onChange={(e) => setsupplierId(e.target.value)}
@@ -230,9 +233,10 @@ export default function UpdateSupplier() {
                                     className={styles.input}
                                     id="quantity"
                                     name="quantity"
-                                    placeholder="Quantity"
+                                    placeholder="Telephone"
                                     type="text"
                                     value={telephone}
+                                    pattern = "[0-9]{10}"
                                     onChange={(e) => settelephone(e.target.value)}
                                     required
                                     />

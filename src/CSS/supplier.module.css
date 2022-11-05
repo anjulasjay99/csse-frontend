@@ -75,3 +75,53 @@
   margin-right: 100px;
   width: 95%;
 }
+
+.actionColumn{
+  width: 20%;
+  text-align: center;
+}
+
+.tHeadRow{
+  background-color: aliceblue;
+}
+
+.searchbarAndBtn{
+  margin-left: 10px;
+  margin-bottom: 20px;
+  width: 50%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  column-gap: 10px;
+}
+
+.searchInput{
+  width: 50%;
+}
+
+.btnPrimary{
+  width: 20%;
+  border-color: #ffff00;
+}
+
+.btnAddSup{
+  width: 100%;
+  border-color: #ffff00;
+}
+
+.btnUpdate{
+  width: 95px;
+  height: 40px;
+  border-color: #00ff2f;
+  float: left;
+  border-radius: 17px;
+}
+
+.btnDelete{
+  margin-left: 5px;
+  width: 95px;
+  height: 40px;
+  border-color: #ffff00;
+  float: left;
+  border-radius: 17px;
+}
