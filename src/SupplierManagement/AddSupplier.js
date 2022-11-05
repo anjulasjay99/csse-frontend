@@ -4,7 +4,7 @@ import Sidebar from '../Components/Sidebar'
 import { Button, Form, FormGroup, Label, Input , Row , Col ,ButtonGroup , FormText } from "reactstrap";
 import styles from '../CSS/supplier.module.css'
 import { useState } from "react";
-// import {addNewSupplier} from './SupplierFacade';
+import {addNewSupplier} from './Supplierfacade';
 import Header from '../Components/Header';
 import {postSupplierUrl} from './SupplierConstants'
  
@@ -141,7 +141,7 @@ export default function AddSupplier() {
                                 id="quantity"
                                 name="quantity"
                                 placeholder="Zip Code"
-                                type="text"
+                                type="number"
                                 value={zip}
                                 onChange={(e) => setzip(e.target.value)}
                                 required
@@ -190,7 +190,7 @@ export default function AddSupplier() {
                                 className={styles.input}
                                 id="productImage"
                                 name="productImage"
-                                type="text"
+                                type="email"
                                 placeholder="Email"
                                 value={email}
                                 onChange={(e) => setemail(e.target.value)}
@@ -222,9 +222,10 @@ export default function AddSupplier() {
                                 className={styles.input}
                                 id="quantity"
                                 name="quantity"
+                                pattern = "[0-9]{10}"
                                 placeholder="Telephone"
                                 type="text"
-                                value={telephone}
+                                value={telephone} 
                                 onChange={(e) => settelephone(e.target.value)}
                                 required
                                 />
