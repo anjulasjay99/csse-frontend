@@ -55,13 +55,15 @@ function ViewProducts(){
                     />
                     </FormGroup>
             </div>
-            <div style={{marginLeft:"20rem"}}>
-                    <Button color='warning' outline style={{color:"black" , borderRadius:"9px" , marginLeft:"6rem"}} onClick={()=>{navigate('/addProduct')}}>Add Product +</Button>
+            <div style={{marginLeft:"17rem"}}>
+                    <Button color='warning' outline style={{color:"black" , borderRadius:"9px" , marginLeft:"6rem" , fontWeight:"600" , fontFamily: "'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif"}} onClick={()=>{navigate('/addProduct')}}>Add Product <i className="fa fa-plus" style={{color:"#ffff00" , marginLeft:"0.7rem"}} aria-hidden="true"></i></Button>
                 
             </div>        
                         
                     <br /><br />
-            </div>        
+            </div>     
+            <div className={styles.cardsContainer}>
+                 
                     <Row xs={1} md={2} className="g-4">
                         {productData.filter((val) =>{
                             if(searchVal === ''){
@@ -88,6 +90,7 @@ function ViewProducts(){
                         </Col>
                         ))}      
                     </Row>
+                    </div>  
             </div>
             </div>
         </> 

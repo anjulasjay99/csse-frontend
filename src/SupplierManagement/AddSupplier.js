@@ -4,7 +4,7 @@ import Sidebar from '../Components/Sidebar'
 import { Button, Form, FormGroup, Label, Input , Row , Col ,ButtonGroup , FormText } from "reactstrap";
 import styles from '../CSS/supplier.module.css'
 import { useState } from "react";
-import {addNewSupplier} from './SupplierFacade';
+// import {addNewSupplier} from './SupplierFacade';
 import Header from '../Components/Header';
 import {postSupplierUrl} from './SupplierConstants'
  
@@ -44,20 +44,20 @@ export default function AddSupplier() {
         const url = 'http://localhost:8070/supplier'
 
         //fetch add new supplier method
-        addNewSupplier(postSupplierUrl, newSupplier).then((res)=>{
-            console.log(res.data);
-            alert("Added Succesfully");
-            setaddress("")
-            setbusinessName("")
-            setemail("")
-            setfullName("")
-            setstate("Colombo")
-            setsupplierId("")
-            settelephone("")
-            setzip("")
-        }).catch((err) =>{
-            console.log(err);
-        })
+    //     addNewSupplier(postSupplierUrl, newSupplier).then((res)=>{
+    //         console.log(res.data);
+    //         alert("Added Succesfully");
+    //         setaddress("")
+    //         setbusinessName("")
+    //         setemail("")
+    //         setfullName("")
+    //         setstate("Colombo")
+    //         setsupplierId("")
+    //         settelephone("")
+    //         setzip("")
+    //     }).catch((err) =>{
+    //         console.log(err);
+    //     })
      
     }
 

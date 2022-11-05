@@ -5,10 +5,10 @@ import { Button, Form, FormGroup, Label, Input , Row , Col ,ButtonGroup , FormTe
 import styles from '../CSS/supplier.module.css'
 import { useState,useEffect } from "react";
 import axios from "axios";
-import {addNewSupplier} from './SupplierFacade';
+// import {addNewSupplier} from './SupplierFacade';
 import {useParams} from "react-router-dom"
 import {postSupplierUrl} from './SupplierConstants'
-import {viewSupplier} from './SupplierFacade';
+// import {viewSupplier} from './SupplierFacade';
 
 //beginning of Updatesupplier method
 export default function UpdateSupplier() {
@@ -29,20 +29,20 @@ export default function UpdateSupplier() {
     useEffect(()=>{
     
         let url = `http://localhost:8070/supplier/get/${id}`;
-        viewSupplier(url).then((res)=>{
+        // viewSupplier(url).then((res)=>{
           
-          console.log(res.data)
-          setbusinessName(res.data.businessName)
-          setaddress(res.data.address)
-          setemail(res.data.email)
-          setfullName(res.data.fullName)
-          setstate(res.data.state)
-          setsupplierId(res.data.supplierId)
-          settelephone(res.data.telephone)
-          setzip(res.data.zip)
-        }).catch((err)=>{
-          console.log(err)
-        })
+        //   console.log(res.data)
+        //   setbusinessName(res.data.businessName)
+        //   setaddress(res.data.address)
+        //   setemail(res.data.email)
+        //   setfullName(res.data.fullName)
+        //   setstate(res.data.state)
+        //   setsupplierId(res.data.supplierId)
+        //   settelephone(res.data.telephone)
+        //   setzip(res.data.zip)
+        // }).catch((err)=>{
+        //   console.log(err)
+        // })
       },[])
 
     //method to update a supplier  
@@ -66,12 +66,12 @@ export default function UpdateSupplier() {
         let url = `http://localhost:8070/supplier/update/${id}`
         
         //fetch add new supplier method
-        addNewSupplier(url, newSupplier).then((res)=>{
-            console.log(res.data);
-            alert("updated Succesfully");
-        }).catch((err) =>{
-            console.log(err);
-        })
+        // addNewSupplier(url, newSupplier).then((res)=>{
+        //     console.log(res.data);
+        //     alert("updated Succesfully");
+        // }).catch((err) =>{
+        //     console.log(err);
+        // })
        
     }
 
