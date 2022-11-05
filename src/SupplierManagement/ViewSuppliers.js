@@ -15,6 +15,17 @@ function ViewSuppliers() {
   let email = sessionStorage.getItem("supplier");
   let { filterData } = useState();
 
+  const getData = () => {
+    axios
+      .get("http://localhost:8070/supplier/")
+      .then((res) => {
+        setSuppliers(res.data.data);
+      })
+      .catch((err) => {
+        alert(err);
+      });
+  }
+
   //onChange function in search input field
   const filterSuppliers = e => {
     setSearchVal(e.target.value);
@@ -23,12 +34,7 @@ function ViewSuppliers() {
     }
   }
 
-  const getData = () => {
-    axios.get(`http://localhost:8070/supplier/get/user/${email}`)
-      .then((res) => {
-        setSuppliers(res.data);
-      })
-  }
+ 
 
   //OnClick function in search button
   const supplierSearch = () => {

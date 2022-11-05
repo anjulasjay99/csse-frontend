@@ -231,9 +231,9 @@ export default function UpdateSupplier() {
                                     id="quantity"
                                     name="quantity"
                                     placeholder="Telephone"
-                                    type="number"
+                                    type="text"
                                     value={telephone}
-                                    pattern="[0-9]{9,10}"
+                                    pattern = "[0-9]{10}"
                                     onChange={(e) => settelephone(e.target.value)}
                                     required
                                     />
