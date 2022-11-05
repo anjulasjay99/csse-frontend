@@ -4,7 +4,7 @@ import Sidebar from '../Components/Sidebar'
 import { Button, Form, FormGroup, Label, Input , Row , Col ,ButtonGroup , FormText } from "reactstrap";
 import styles from '../CSS/supplier.module.css'
 import { useState } from "react";
-import {addNewSupplier} from './SupplierFacade';
+import {addNewSupplier} from './Supplierfacade';
 import Header from '../Components/Header';
 import {postSupplierUrl} from './SupplierConstants'
  

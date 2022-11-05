@@ -5,10 +5,10 @@ import { Button, Form, FormGroup, Label, Input , Row , Col ,ButtonGroup , FormTe
 import styles from '../CSS/supplier.module.css'
 import { useState,useEffect } from "react";
 import axios from "axios";
-import {addNewSupplier} from './SupplierFacade';
+import {addNewSupplier} from './Supplierfacade';
 import {useParams} from "react-router-dom"
 import {postSupplierUrl} from './SupplierConstants'
-import {viewSupplier} from './SupplierFacade';
+import {viewSupplier} from './Supplierfacade';
 import Header from '../Components/Header';
 
 //beginning of Updatesupplier method
