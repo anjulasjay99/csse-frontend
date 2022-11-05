@@ -16,10 +16,14 @@ function ViewSuppliers() {
   let {filterData} = useState();
 
   const getData = () => {
-    axios.get(`http://localhost:8070/supplier/get/user/${email}`)
-        .then((res) => {
-          setSuppliers(res.data);
-    })
+    axios
+      .get("http://localhost:8070/supplier/")
+      .then((res) => {
+        setSuppliers(res.data.data);
+      })
+      .catch((err) => {
+        alert(err);
+      });
   }
 
   const filterSuppliers = e =>{

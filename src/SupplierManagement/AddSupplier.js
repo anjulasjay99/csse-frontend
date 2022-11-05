@@ -222,10 +222,10 @@ export default function AddSupplier() {
                                 className={styles.input}
                                 id="quantity"
                                 name="quantity"
+                                pattern = "[0-9]{10}"
                                 placeholder="Telephone"
-                                type="number"
-                                value={telephone}
-                                pattern="[0-9]{9,10}"
+                                type="text"
+                                value={telephone} 
                                 onChange={(e) => settelephone(e.target.value)}
                                 required
                                 />
