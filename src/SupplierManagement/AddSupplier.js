@@ -141,7 +141,7 @@ export default function AddSupplier() {
                                 id="quantity"
                                 name="quantity"
                                 placeholder="Zip Code"
-                                type="text"
+                                type="number"
                                 value={zip}
                                 onChange={(e) => setzip(e.target.value)}
                                 required
@@ -190,7 +190,7 @@ export default function AddSupplier() {
                                 className={styles.input}
                                 id="productImage"
                                 name="productImage"
-                                type="text"
+                                type="email"
                                 placeholder="Email"
                                 value={email}
                                 onChange={(e) => setemail(e.target.value)}
@@ -223,8 +223,9 @@ export default function AddSupplier() {
                                 id="quantity"
                                 name="quantity"
                                 placeholder="Telephone"
-                                type="text"
+                                type="number"
                                 value={telephone}
+                                pattern="[0-9]{9,10}"
                                 onChange={(e) => settelephone(e.target.value)}
                                 required
                                 />

@@ -183,8 +183,8 @@ export default function UpdateSupplier() {
                                     className={styles.input}
                                     id="quantity"
                                     name="quantity"
-                                    placeholder="Quantity"
-                                    type="text"
+                                    placeholder="Zip Code"
+                                    type="number"
                                     value={zip}
                                     onChange={(e) => setzip(e.target.value)}
                                     required
@@ -199,7 +199,7 @@ export default function UpdateSupplier() {
                                     className={styles.input}
                                     id="productImage"
                                     name="productImage"
-                                    type="text"
+                                    type="email"
                                     value={email}
                                     onChange={(e) => setemail(e.target.value)}
             
@@ -215,7 +215,7 @@ export default function UpdateSupplier() {
                                     className={styles.input}
                                     id="quantity"
                                     name="quantity"
-                                    placeholder="Quantity"
+                                    placeholder="Supplier Id"
                                     type="text"
                                     value={supplierId}
                                     onChange={(e) => setsupplierId(e.target.value)}
@@ -230,9 +230,10 @@ export default function UpdateSupplier() {
                                     className={styles.input}
                                     id="quantity"
                                     name="quantity"
-                                    placeholder="Quantity"
-                                    type="text"
+                                    placeholder="Telephone"
+                                    type="number"
                                     value={telephone}
+                                    pattern="[0-9]{9,10}"
                                     onChange={(e) => settelephone(e.target.value)}
                                     required
                                     />
