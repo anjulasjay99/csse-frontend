@@ -12,8 +12,8 @@ function ViewSuppliers() {
   const navigate = useNavigate();
   const [suppliers, setSuppliers] = useState([]);
   const [searchVal, setSearchVal] = useState("");
-  let email = "samanperera@gmail.com";
-  let {filterData} = useState();
+  let email = sessionStorage.getItem("supplier");
+  let { filterData } = useState();
 
   const getData = () => {
     axios
@@ -26,37 +26,40 @@ function ViewSuppliers() {
       });
   }
 
-  const filterSuppliers = e =>{
+  //onChange function in search input field
+  const filterSuppliers = e => {
     setSearchVal(e.target.value);
-    if(e.target.value === ""){
+    if (e.target.value === "") {
       getData();
     }
   }
 
-  const supplierSearch = () =>{
  
-    filterData = suppliers.filter((value)=>{
-      return(
-        value.businessName.toLowerCase().includes(searchVal.toLowerCase()) || 
+
+  //OnClick function in search button
+  const supplierSearch = () => {
+
+    filterData = suppliers.filter((value) => {
+      return (
+        value.businessName.toLowerCase().includes(searchVal.toLowerCase()) ||
         value.supplierId.toLowerCase().includes(searchVal.toLowerCase()) ||
         value.fullName.toLowerCase().includes(searchVal.toLowerCase()) ||
         value.telephone.toLowerCase().includes(searchVal.toLowerCase()) ||
-        value.email.toLowerCase().includes(searchVal.toLowerCase()) ||
-        value.address.toLowerCase().includes(searchVal.toLowerCase()) ||
-        value.state.toLowerCase().includes(searchVal.toLowerCase()) ||
-        value.zip.toLowerCase().includes(searchVal.toLowerCase()) 
-      )     
+        value.email.toLowerCase().includes(searchVal.toLowerCase())
+      )
     })
     console.log(filterData)
     setSuppliers(filterData)
-   
+
   }
 
+  // Navigate to the update UI from the update action button
   function updateSupplier(supplier) {
     console.log(supplier._id)
     navigate(`/updateSupplier/${supplier._id}`)
   }
 
+  // Delete supplier function
   const deleteSupplier = (supplier) => {
     console.log(supplier)
     axios.delete(`http://localhost:8070/supplier/delete/${supplier._id}`).then((data) => {
@@ -69,6 +72,7 @@ function ViewSuppliers() {
     })
   }
 
+  // Navigate to the Add UI from the Add Supplier button
   const addNewSupplier = () => {
     navigate("/addsupplier");
   };
@@ -84,10 +88,12 @@ function ViewSuppliers() {
       });
   }, []);
 
+  // Check whether records exists
   if (suppliers.length === 0) {
     return (
       <div>
         <Header HeadTitle="All Suppliers" />
+        No Data Available
       </div>
     );
   } else {
@@ -119,9 +125,9 @@ function ViewSuppliers() {
                     allowClear
                     value={searchVal}
                   />
-                   <Button
+                  <Button
                     className={common.btnPrimary}
-                    onClick={supplierSearch} type="submit" 
+                    onClick={supplierSearch} type="submit"
                   > search</Button>
                 </div>
                 <div>
@@ -134,9 +140,7 @@ function ViewSuppliers() {
                 </div>
               </div>
 
-              <Table  striped
-                className={styles.table}
-              >
+              <Table striped className={styles.table} >
                 <thead style={{ backgroundColor: "aliceblue" }}>
                   <tr>
                     <th>No</th>
@@ -163,11 +167,10 @@ function ViewSuppliers() {
                           <td>{supplier.address}</td>
                           <td>
                             <div style={{ float: "left" }}>
-
+                              {/* Action Buttons Column - Update and Delete */}
                               <div> <BsPencilSquare onClick={() => { updateSupplier(supplier) }} size={20} style={{ marginLeft: "5px", float: "left" }} /> Edit
                                 <BsTrash onClick={() => { deleteSupplier(supplier) }} size={20} style={{ marginLeft: "20px" }} /> Delete
                               </div>
-
                             </div>
                           </td>
                         </tr>

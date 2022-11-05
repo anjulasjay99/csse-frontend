@@ -1,12 +1,13 @@
+import axios from "axios";
 import Sidebar from "../Components/Sidebar";
 import styles from '../CSS/Product.module.css';
-import { Button, Form, FormGroup, Label, Input , Row , Col ,ButtonGroup , FormText } from "reactstrap";
+import { Button, Form, FormGroup, Label, Input , Row , Col ,ButtonGroup  } from "reactstrap";
 import { useState , useEffect } from "react";
-import axios from "axios";
-import { FormControl } from "react-bootstrap";
 import Offline from "../Components/Offline";
 
 function AddProduct(){
+
+    // Setting use states for variables to add products.
 
     const [ productName , setName ] = useState("");
     const [ supplierName , setSupplier ] = useState("");
@@ -15,10 +16,25 @@ function AddProduct(){
     const [ quantity , setQuantity ] = useState("");
     const [ description , setDescription ] = useState("");
     const [ image , setImage ] = useState("");
-    const [ isOnline , setOnline ] = useState();
+    const [ isOnline , setOnline ] = useState(true);
+    const [ suppliers , setSuppliers ] = useState([]);
+
+    // Seeting the image to the use state variable when uploaded.
     const onChangeFile = (e) =>{
         setImage(e.target.files[0]);
     };
+
+    // Function to get suppliers to be bound to the dropdown
+    function getSuppliers() {
+        axios.get('http://localhost:8070/supplier/').then((res) =>{
+            setSuppliers(res.data);
+            console.log(res.data);
+        }).catch((err) =>{
+            console.log(err);
+        })
+    }
+
+    // Function triggered when clicking the submit button
     function submit() {
 
         const formData = new FormData();
@@ -30,7 +46,8 @@ function AddProduct(){
         formData.append("quantity" , quantity );
         formData.append("productDescription" , description );
         formData.append("productImage" , image );
-        console.log(priceRate , );
+        
+        // API call to add products passed through 'formData'
         axios.post('http://localhost:8070/products/addProduct' , formData).then((res)=>{
             console.log(res);
             alert("Added Succesfully");
@@ -39,6 +56,7 @@ function AddProduct(){
         })
     }
 
+    // Function to clear the form
     function clear(){
         setName("");
         setSupplier("");
@@ -49,6 +67,9 @@ function AddProduct(){
     }
 
     useEffect(()=>{
+
+        getSuppliers();
+
         // Implementation of observer design pattern
 
         // Subscription to events (Online and Offline)
@@ -57,12 +78,12 @@ function AddProduct(){
 
         return() =>{
             // Removing the even on component gets unmounted
-
             window.removeEventListener("online" , () => setOnline(true));
             window.removeEventListener("offline", () => setOnline(false));
         }
     }, [])
 
+    // If status is online , the page will be displayed otherwise the "slow connection" page will be displayed
     return(
         <>
         {isOnline ? (
@@ -95,11 +116,15 @@ function AddProduct(){
                              id="supName"
                              name="supName"
                              placeholder="Supplier Name"
-                             type="text"
-                             value={supplierName}
+                             type="select"
                              onChange={(e) => setSupplier(e.target.value)}
                              required
-                             />
+                             >
+                                {suppliers.map((sup) =>(
+                                     <option>{sup.businessName}</option>
+                              ))}
+                             </Input>                     
+            
                          </FormGroup>
                      </Col>
                  </Row>
