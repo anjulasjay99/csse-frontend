@@ -10,7 +10,7 @@ import ViewSuppliers from "./SupplierManagement/ViewSuppliers";
 function App() {
   return (
     <div>
-       <BrowserRouter>
+      <BrowserRouter>
         <Routes>
           <Route path="/sidebar" element={<Sidebar />} exact />
 
@@ -20,7 +20,11 @@ function App() {
           <Route path="/viewProducts" element={<ViewProducts />} exact />
           <Route path="/offline" element={<Offline />} exact />
           <Route path="/ViewSuppliers" element={<ViewSuppliers />} exact />
-          <Route path="/updateSupplier/:id" element={<UpdateSupplier />} exact />
+          <Route
+            path="/updateSupplier/:id"
+            element={<UpdateSupplier />}
+            exact
+          />
         </Routes>
       </BrowserRouter>
     </div>

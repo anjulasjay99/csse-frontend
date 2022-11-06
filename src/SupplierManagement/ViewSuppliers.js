@@ -7,6 +7,8 @@ import axios from "axios";
 import Header from "../Components/Header";
 import { BsPencilSquare, BsTrash, BsSearch } from "react-icons/bs";
 import Sidebar from "../Components/Sidebar";
+import { viewAllSuppliers } from "./Supplierfacade";
+import { postSupplierUrl } from "./SupplierConstants";
 
 function ViewSuppliers() {
   const navigate = useNavigate();
@@ -76,8 +78,7 @@ function ViewSuppliers() {
   };
 
   useEffect(() => {
-    axios
-      .get("http://localhost:8070/supplier/")
+    viewAllSuppliers(postSupplierUrl)
       .then((res) => {
         setSuppliers(res.data.data);
       })
@@ -161,24 +162,24 @@ function ViewSuppliers() {
                                 <div>
                                   {" "}
                                   <Button className={styles.btnUpdate}>
-                                  <BsPencilSquare
-                                    onClick={() => {
-                                      updateSupplier(supplier);
-                                    }}
-                                    size={17}
-                                    // style={{ marginLeft: "5px", float: "left" }}
-                                  />{" "}
-                                  Update
+                                    <BsPencilSquare
+                                      onClick={() => {
+                                        updateSupplier(supplier);
+                                      }}
+                                      size={17}
+                                      // style={{ marginLeft: "5px", float: "left" }}
+                                    />{" "}
+                                    Update
                                   </Button>
                                   <Button className={styles.btnDelete}>
-                                  <BsTrash
-                                    onClick={() => {
-                                      deleteSupplier(supplier);
-                                    }}
-                                    size={17}
-                                    // style={{ marginLeft: "20px" }}
-                                  />{" "}
-                                  Delete
+                                    <BsTrash
+                                      onClick={() => {
+                                        deleteSupplier(supplier);
+                                      }}
+                                      size={17}
+                                      // style={{ marginLeft: "20px" }}
+                                    />{" "}
+                                    Delete
                                   </Button>
                                 </div>
                               </div>
