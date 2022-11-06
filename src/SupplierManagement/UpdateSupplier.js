@@ -11,7 +11,6 @@ import {postSupplierUrl} from './SupplierConstants'
 import {viewSupplier} from './Supplierfacade';
 import Header from '../Components/Header';
 
-
 //beginning of Updatesupplier method
 export default function UpdateSupplier() {
 
