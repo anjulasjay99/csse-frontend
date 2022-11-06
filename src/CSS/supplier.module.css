@@ -107,6 +107,7 @@
 .btnAddSup{
   width: 100%;
   border-color: #ffff00;
+  
 }
 
 .btnUpdate{
@@ -118,7 +119,7 @@
 }
 
 .btnDelete{
-  margin-left: 5px;
+  margin-left: 15px;
   width: 95px;
   height: 40px;
   border-color: #ffff00;
