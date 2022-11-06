@@ -8,7 +8,7 @@ import Header from "../Components/Header";
 import { BsPencilSquare, BsTrash, BsSearch } from "react-icons/bs";
 import Sidebar from "../Components/Sidebar";
 import { viewAllSuppliers } from "./Supplierfacade";
-import { postSupplierUrl } from "./SupplierConstants";
+import { postSupplierUrl, deleteUrl, updateUrl } from "./SupplierConstants";
 
 function ViewSuppliers() {
   const navigate = useNavigate();
@@ -18,7 +18,7 @@ function ViewSuppliers() {
 
   const getData = () => {
     axios
-      .get("http://localhost:8070/supplier/")
+      .get(postSupplierUrl)
       .then((res) => {
         setSuppliers(res.data.data);
       })
@@ -53,14 +53,14 @@ function ViewSuppliers() {
   // Navigate to the update UI from the update action button
   function updateSupplier(supplier) {
     console.log(supplier._id);
-    navigate(`/updateSupplier/${supplier._id}`);
+    navigate(updateUrl + supplier._id);
   }
 
   // Delete supplier function
   const deleteSupplier = (supplier) => {
     console.log(supplier);
     axios
-      .delete(`http://localhost:8070/supplier/delete/${supplier._id}`)
+      .delete(deleteUrl + supplier._id)
       .then((data) => {
         console.log(data);
         window.location.reload();
